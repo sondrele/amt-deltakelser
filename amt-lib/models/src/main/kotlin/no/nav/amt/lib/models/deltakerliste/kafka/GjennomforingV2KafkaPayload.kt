@@ -133,6 +133,7 @@ sealed interface GjennomforingV2KafkaPayload {
         // I tilfellet vi har noen gjennomføringer som feiler
         val gjennomforingBlacklist = setOf<UUID>(
             UUID.fromString("e1be2f30-bb71-4938-86fb-582f4bc8a8c7"),
+            UUID.fromString("f88e1ce6242d12f95945fbe1cecaac69"),
         )
 
         val direktetiltak =
