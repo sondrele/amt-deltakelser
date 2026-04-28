@@ -45,10 +45,15 @@ class DeltakerlisteConsumer(
     suspend fun consume(
         key: UUID,
         value: String?,
-    ) = if (value == null) {
-        deltakerlisteRepository.delete(key)
-    } else {
-        handterDeltakerliste(objectMapper.readValue(value))
+    ) {
+        if (value == null) {
+            deltakerlisteRepository.delete(key)
+        } else {
+            if (GjennomforingV2KafkaPayload.gjennomforingBlacklist.contains(key)) {
+                return
+            }
+            handterDeltakerliste(objectMapper.readValue(value))
+        }
     }
 
     private suspend fun handterDeltakerliste(deltakerlistePayload: GjennomforingV2KafkaPayload) {
