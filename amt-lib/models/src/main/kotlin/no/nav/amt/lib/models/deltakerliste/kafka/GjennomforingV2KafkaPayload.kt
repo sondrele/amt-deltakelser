@@ -131,7 +131,9 @@ sealed interface GjennomforingV2KafkaPayload {
         const val ENKELTPLASS_V2_TYPE = "TiltaksgjennomforingV2.Enkeltplass"
 
         // I tilfellet vi har noen gjennomføringer som feiler
-        val gjennomforingBlacklist = emptySet<UUID>()
+        val gjennomforingBlacklist = setOf<UUID>(
+            UUID.fromString("e1be2f30-bb71-4938-86fb-582f4bc8a8c7"),
+        )
 
         val direktetiltak =
             setOf(
