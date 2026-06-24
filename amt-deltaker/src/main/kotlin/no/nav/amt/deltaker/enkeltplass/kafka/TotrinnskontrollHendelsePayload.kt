@@ -6,8 +6,8 @@ import java.time.Instant
 import java.util.UUID
 
 data class TotrinnskontrollHendelsePayload(
-    val id: UUID,
-    val entityId: UUID,
+    val id: UUID, // Random id(for ukjente meldingstyper), eller totrinnskontrollRefId på EndrePrisinformasjon/EnkeltplassSoktInn
+    val entityId: UUID, // gjennomføringID(key på topicen)
     val type: TotrinnskontrollType,
     val behandletAv: TotrinnskontrollAgent,
     val behandletTidspunkt: Instant,
@@ -15,20 +15,22 @@ data class TotrinnskontrollHendelsePayload(
     val besluttetTidspunkt: Instant?,
     val besluttelse: TotrinnskontrollBesluttelse?,
     val aarsaker: List<String>,
-    val forklaring: String?,
+    val forklaring: String?, // Kan sette på vent (avvise) med forklaring
 ) {
     enum class TotrinnskontrollType {
         TILSAGN_OPPRETTELSE,
         TILSAGN_ANNULLERING,
         TILSAGN_OPPGJOR,
         UTBETALING_LINJE_OPPRETTELSE,
-        ENKELTPLASS_OKONOMI,
+        ENKELTPLASS_OKONOMI, // Mottas når deltakelsen godkjennes
+
+        // ENKELTPLASS_GODKJENN_PRISINFORMASJON, // Mottas når prisinformasjon godkjennes
         TILSKUDD_OPPRETTELSE,
     }
 
     enum class TotrinnskontrollBesluttelse {
         GODKJENT,
-        AVVIST,
+        AVVIST, // Sett på vent
     }
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")

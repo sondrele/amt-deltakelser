@@ -36,11 +36,22 @@ sealed interface GjennomforingRequestPayload {
         )
     }
 
+    /*
+        Endring av prisinformasjon er et forslag fra nav veileder
+        som skal godkjennes av beslutter(f.o.m status søkt inn)
+        ØkonomiGodkjent returneres når beslutter har godkjent(med samme id)
+     */
     data class EnkeltplassEndrePrisinformasjon(
         override val gjennomforingId: UUID,
+        // val totrinnskontrollRefId: UUID, // Det må genereres ny id hver gang man endrer prisinfo sånn at vi vet hvilken versjon som blir godkjent
         val payload: Prisinformasjon,
     ) : GjennomforingRequestPayload
 
+    /*
+        Endring av innhold trenger ikke godkjennes.
+        Det lagres på gjennomføringen (for å følge samme struktur som de andre tiltakstypene)
+        Lagres rett på gjennomføringen i komet database samtidig som det sendes til mr
+     */
     data class EnkeltplassEndreInnhold(
         override val gjennomforingId: UUID,
         val payload: UpsertEnkeltplass.OpplaringKategorisering?,
