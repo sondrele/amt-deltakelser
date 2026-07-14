@@ -4,6 +4,7 @@ import no.nav.amt.deltaker.bff.navtiltakskoordinator.model.Tiltakskoordinator
 import no.nav.amt.lib.models.deltakerliste.GjennomforingPameldingType
 import no.nav.amt.lib.models.deltakerliste.Oppstartstype
 import no.nav.amt.lib.models.deltakerliste.tiltakstype.Tiltakskode
+import no.nav.amt.lib.models.deltakerliste.tiltakstype.TiltakskodeDto
 import java.time.LocalDate
 import java.util.UUID
 
@@ -19,4 +20,6 @@ data class DeltakerlisteResponse(
     val pameldingstype: GjennomforingPameldingType,
     val koordinatorer: List<Tiltakskoordinator>,
     val erEnkeltplass: Boolean,
-)
+) {
+    val tiltakskodeDto: TiltakskodeDto = TiltakskodeDto(tiltakskode)
+}

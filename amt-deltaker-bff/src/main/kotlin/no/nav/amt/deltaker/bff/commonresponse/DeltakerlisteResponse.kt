@@ -8,6 +8,7 @@ import no.nav.amt.lib.models.deltakerliste.GjennomforingPameldingType
 import no.nav.amt.lib.models.deltakerliste.GjennomforingStatusType
 import no.nav.amt.lib.models.deltakerliste.Oppstartstype
 import no.nav.amt.lib.models.deltakerliste.tiltakstype.Tiltakskode
+import no.nav.amt.lib.models.deltakerliste.tiltakstype.TiltakskodeDto
 import java.time.LocalDate
 import java.util.UUID
 
@@ -28,6 +29,8 @@ data class DeltakerlisteResponse(
     val opplaringKategoriseringValg: OpplaringKategoriseringValgResponse? = null,
     val prisinformasjon: PrisinformasjonDto? = null,
 ) {
+    val tiltakskodeDto: TiltakskodeDto = TiltakskodeDto(tiltakskode)
+
     data class ArrangorResponse(
         val navn: String,
         val organisasjonsnummer: String,
